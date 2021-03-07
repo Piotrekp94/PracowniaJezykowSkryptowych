@@ -1,0 +1,6 @@
+*
+!*/
+.idea/
+# Don't ignore .gitignore and *.foo files
+!.gitignore
+!*.sh
