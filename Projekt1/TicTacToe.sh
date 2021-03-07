@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BOARD=("0" "0" "0" "0" "0" "0" "0" "0" "0")
-PLAYER="2"
+PLAYER="1"
 CONTINUE_GAME="0"
 
 function printBoard {
@@ -13,7 +13,7 @@ function printBoard {
 isHorizontal() {
   for i in {0..2}; do
     if [ "${BOARD[i * 3]}" -ne 0 ]; then
-      if [[ "${BOARD[i * 3]}" -eq "${BOARD[i * 3 + 1]}" && "${BOARD[i * 3]}" -eq "${BOARD[i * 3 + 1]}" ]]; then
+      if [[ "${BOARD[i * 3]}" -eq "${BOARD[i * 3 + 1]}" && "${BOARD[i * 3]}" -eq "${BOARD[i * 3 + 2]}" ]]; then
         return 0
       fi
     fi
@@ -41,6 +41,10 @@ isVertical() {
 
 checkIfGameEnded() {
   isDiagonal || isHorizontal || isVertical
+}
+
+checkIfDraw() {
+  [ "$1" -eq 8 ]
 }
 
 changePlayer() {
@@ -77,12 +81,16 @@ while [ $CONTINUE_GAME -eq 0 ]; do
   echo -e "Podaj indeks wiersza [0-2]:"
   read ROW
   if verifyPosition "${COLUMN}" "${ROW}" -eq 0; then
-    echo "${COLUMN}" "${ROW}"
     updateBoard "${COLUMN}" "${ROW}"
-    changePlayer
     if checkIfGameEnded -eq 0; then
       CONTINUE_GAME=1
+      echo -e "Dziekuje za gre - zwyciezyl gracz ${PLAYER}"
     fi
+    if checkIfDraw "${MOVES}"  -eq 0; then
+      CONTINUE_GAME=1
+      echo -e "Dziekuje za gre - remis!"
+    fi
+    changePlayer
   else
     read -p "To pole jest juz zajete, wybierz inne - nacisnij dowolny klawisz by kontynuowac"
   fi
