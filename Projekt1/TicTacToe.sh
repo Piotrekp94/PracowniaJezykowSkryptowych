@@ -3,6 +3,7 @@
 BOARD=("0" "0" "0" "0" "0" "0" "0" "0" "0")
 PLAYER="1"
 CONTINUE_GAME="0"
+MOVES=0
 
 function printBoard {
   clear
@@ -10,6 +11,7 @@ function printBoard {
   echo "${BOARD[3]} | ${BOARD[4]} | ${BOARD[5]}"
   echo "${BOARD[6]} | ${BOARD[7]} | ${BOARD[8]}"
 }
+
 isHorizontal() {
   for i in {0..2}; do
     if [ "${BOARD[i * 3]}" -ne 0 ]; then
@@ -73,24 +75,34 @@ updateBoard() {
 
 }
 
+getDigit() {
+  local NUMBER
+  local REGEXP='^[0-2]$'
+  while [[ ! $NUMBER =~ $REGEXP ]]; do
+    read -r NUMBER
+  done
+  echo "$NUMBER"
+}
+
 while [ $CONTINUE_GAME -eq 0 ]; do
   printBoard
   echo -e "\nRuch gracza  ${PLAYER}"
   echo -e "Podaj indeks kolumny [0-2]:"
-  read COLUMN
+  COLUMN=$(getDigit)
   echo -e "Podaj indeks wiersza [0-2]:"
-  read ROW
+  ROW=$(getDigit)
   if verifyPosition "${COLUMN}" "${ROW}" -eq 0; then
     updateBoard "${COLUMN}" "${ROW}"
     if checkIfGameEnded -eq 0; then
       CONTINUE_GAME=1
       echo -e "Dziekuje za gre - zwyciezyl gracz ${PLAYER}"
     fi
-    if checkIfDraw "${MOVES}"  -eq 0; then
+    if checkIfDraw "${MOVES}" -eq 0; then
       CONTINUE_GAME=1
       echo -e "Dziekuje za gre - remis!"
     fi
     changePlayer
+    MOVES=$(($MOVES + 1))
   else
     read -p "To pole jest juz zajete, wybierz inne - nacisnij dowolny klawisz by kontynuowac"
   fi
