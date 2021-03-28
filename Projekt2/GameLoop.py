@@ -18,7 +18,7 @@ class GameLoop:
         self.ball = Ball(315, 440)
 
         self.levelManager = LevelManager(width, height)
-        self.bricks = self.levelManager.getFirstLevel()
+        self.bricks = self.levelManager.getSecondLevel()
         self.clock = pygame.time.Clock()
 
     def isGameOn(self):

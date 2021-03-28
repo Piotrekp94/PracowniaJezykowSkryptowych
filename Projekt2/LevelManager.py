@@ -1,3 +1,5 @@
+import math
+
 import pygame
 from pygame.locals import KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT, QUIT
 
@@ -28,4 +30,12 @@ class LevelManager:
         print(int(amount))
         for i in range(int(amount)):
             bricks.add(Brick(i * self.brickWidth + (i + 1) * xoffset + xoffset, 50))
+        return bricks
+
+    def getSecondLevel(self):
+        bricks = pygame.sprite.Group()
+        for i in range(0, self.windowWidth, self.brickWidth):
+            for j in range(0, self.windowHeight, self.brickHeight):
+                if abs(math.dist([i, j], [self.windowWidth / 2, self.windowHeight / 2])) < 150:
+                    bricks.add(Brick(i, j))
         return bricks
