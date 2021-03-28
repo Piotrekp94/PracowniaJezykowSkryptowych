@@ -29,9 +29,7 @@ class GameLoop:
         self.player.update(pressed_keys)
         self.draw()
         if pygame.sprite.spritecollideany(self.ball, self.bricks):
-            delete_klocek = pygame.sprite.spritecollideany(self.ball, self.bricks)
-            delete_klocek.kill()
-            # usuniecie klocka
+            pygame.sprite.spritecollideany(self.ball, self.bricks).kill()
 
         self.clock.tick(60)
         pygame.display.flip()
