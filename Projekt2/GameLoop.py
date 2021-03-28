@@ -3,6 +3,7 @@ from pygame.locals import KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT, QUIT
 
 from Projekt2.Ball import Ball
 from Projekt2.Brick import Brick
+from Projekt2.LevelManager import LevelManager
 from Projekt2.Player import Player
 
 
@@ -15,8 +16,9 @@ class GameLoop:
         self.screen = pygame.display.set_mode([width, height])
         self.player = Player(305, 450, width)
         self.ball = Ball(315, 440)
-        self.bricks = pygame.sprite.Group()
-        self.bricks.add(Brick(20, 20))
+
+        self.levelManager = LevelManager(width, height)
+        self.bricks = self.levelManager.getFirstLevel()
         self.clock = pygame.time.Clock()
 
     def isGameOn(self):
@@ -28,9 +30,8 @@ class GameLoop:
         pressed_keys = pygame.key.get_pressed()
         self.player.update(pressed_keys)
         self.draw()
-        if pygame.sprite.spritecollideany(self.ball, self.bricks):
-            pygame.sprite.spritecollideany(self.ball, self.bricks).kill()
-
+        self.handleCollision()
+        self.ball.move()
         self.clock.tick(60)
         pygame.display.flip()
 
@@ -48,3 +49,11 @@ class GameLoop:
             self.screen.blit(brick.surf, brick.rect)
         self.screen.blit(self.player.surf, self.player.rect)
         self.screen.blit(self.ball.surf, self.ball.rect)
+
+    def handleCollision(self):
+        # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
+        # if (collidingObject):
+        #     if(collidingObject.rect.width / 2):
+        #
+        #     collidingObject.kill()
+        pass
