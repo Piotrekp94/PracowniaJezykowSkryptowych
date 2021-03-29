@@ -1,8 +1,7 @@
 import pygame
-from pygame.locals import KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT, QUIT
+from pygame.locals import KEYDOWN, K_ESCAPE, K_n
 
 from Projekt2.Ball import Ball
-from Projekt2.Brick import Brick
 from Projekt2.LevelManager import LevelManager
 from Projekt2.Player import Player
 
@@ -18,8 +17,9 @@ class GameLoop:
         self.ball = Ball(315, 440)
 
         self.levelManager = LevelManager(width, height)
-        self.bricks = self.levelManager.getFifthLevel()
         self.clock = pygame.time.Clock()
+        self.currentLevel = 4
+        self.bricks = self.levelManager.getMapLevel(self.currentLevel)
 
     def isGameOn(self):
         return self.isPlaying
@@ -42,6 +42,8 @@ class GameLoop:
             elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     self.isPlaying = False
+                if event.key == K_n:
+                    self.loadNextLevel()
 
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -57,3 +59,12 @@ class GameLoop:
         #
         #     collidingObject.kill()
         pass
+
+    def loadNextLevel(self):
+        if self.currentLevel < 6:
+            self.currentLevel += 1
+            self.bricks = self.levelManager.getMapLevel(self.currentLevel)
+            self.ball = Ball(315, 440)
+            print(self.currentLevel)
+        if self.currentLevel >= 6:
+            self.bricks = []

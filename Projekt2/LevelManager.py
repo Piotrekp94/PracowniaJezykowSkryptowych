@@ -18,7 +18,11 @@ class LevelManager:
 
     def getMapLevel(self, level):
         switcher = {
-            1: self.getFirstLevel()
+            1: self.getFirstLevel(),
+            2: self.getSecondLevel(),
+            3: self.getThirdLevel(),
+            4: self.getFourthLevel(),
+            5: self.getFifthLevel()
         }
         return switcher.get(level)
 
@@ -55,9 +59,17 @@ class LevelManager:
 
     def getFourthLevel(self):
         bricks = pygame.sprite.Group()
-        for i in range(0, self.windowWidth, self.brickWidth):
-            for j in range(0, self.windowHeight, self.brickHeight):
-                if abs(math.dist([i, j], [self.windowWidth / 2, self.windowHeight / 2])) < 150:
+        offset = 100
+        p1 = np.asarray([offset, offset])
+        p2 = np.asarray([offset, self.windowHeight - offset])
+        p3 = np.asarray([self.windowWidth - offset, offset])
+        p4 = np.asarray([self.windowWidth - offset, self.windowHeight - offset])
+        for i in range(offset, self.windowWidth - offset + 1, self.brickWidth):
+            for j in range(offset, self.windowHeight - offset + 1, self.brickHeight):
+                if (self.distanceFromLine(p1, p2, i, j) < 10
+                        or self.distanceFromLine(p1, p3, i, j) < 10
+                        or self.distanceFromLine(p2, p4, i, j) < 10
+                        or self.distanceFromLine(p3, p4, i, j) < 10):
                     bricks.add(Brick(i, j))
         return bricks
 
