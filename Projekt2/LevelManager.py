@@ -1,11 +1,10 @@
 import math
 
+import numpy as np
 import pygame
-from pygame.locals import KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT, QUIT
+from numpy.linalg import norm
 
-from Projekt2.Ball import Ball
 from Projekt2.Brick import Brick
-from Projekt2.Player import Player
 
 
 class LevelManager:
@@ -39,3 +38,51 @@ class LevelManager:
                 if abs(math.dist([i, j], [self.windowWidth / 2, self.windowHeight / 2])) < 150:
                     bricks.add(Brick(i, j))
         return bricks
+
+    def getThirdLevel(self):
+        bricks = pygame.sprite.Group()
+        p1 = np.asarray([0, 0])
+        p2 = np.asarray([self.windowWidth, self.windowHeight])
+        p3 = np.asarray([0, self.windowHeight])
+        p4 = np.asarray([self.windowWidth, 0])
+
+        for i in range(100, self.windowWidth - 100, self.brickWidth):
+            for j in range(100, self.windowHeight - 100, self.brickHeight):
+                if (self.distanceFromLine(p1, p2, i, j) < 10
+                        or self.distanceFromLine(p3, p4, i, j) < 10):
+                    bricks.add(Brick(i, j))
+        return bricks
+
+    def getFourthLevel(self):
+        bricks = pygame.sprite.Group()
+        for i in range(0, self.windowWidth, self.brickWidth):
+            for j in range(0, self.windowHeight, self.brickHeight):
+                if abs(math.dist([i, j], [self.windowWidth / 2, self.windowHeight / 2])) < 150:
+                    bricks.add(Brick(i, j))
+        return bricks
+
+    def getFifthLevel(self):
+        bricks = pygame.sprite.Group()
+        eyePosition = [self.windowWidth / 3, self.windowHeight / 3]
+        secondEyePosition = [self.windowWidth / 3 * 2, self.windowHeight / 3]
+
+        for i in range(0, self.windowWidth, self.brickWidth):
+            for j in range(int(self.windowHeight / 2), self.windowHeight, self.brickHeight):
+                if abs(math.dist([i, j], [self.windowWidth / 2, self.windowHeight / 2])) < 150:
+                    bricks.add(Brick(i, j))
+
+        for i in range(0, self.windowWidth, self.brickWidth):
+            for j in range(0, self.windowHeight, self.brickHeight):
+                if 70 > math.dist([i, j], eyePosition) > 30:
+                    bricks.add(Brick(i, j))
+
+        for i in range(0, self.windowWidth, self.brickWidth):
+            for j in range(0, self.windowHeight, self.brickHeight):
+                if 70 > math.dist([i, j], secondEyePosition) > 30:
+                    bricks.add(Brick(i, j))
+        return bricks
+
+    @staticmethod
+    def distanceFromLine(lineStart, lineEnd, pointX, pointY):
+        return np.abs(np.cross(lineEnd - lineStart, lineStart - np.asarray([pointX, pointY]))) / norm(
+            lineEnd - lineStart)
