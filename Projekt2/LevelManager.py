@@ -5,16 +5,19 @@ import pygame
 from numpy.linalg import norm
 
 from Projekt2.Brick import Brick
+from Projekt2.levels.GameLevel import GameLevel
 
 
 class LevelManager:
 
-    def __init__(self, windowWidth, windowHeight):
+    def __init__(self, windowWidth, windowHeight, screen):
+        self.screen = screen
         self.dummyBrick = Brick(0, 0)
         self.windowHeight = windowHeight
         self.windowWidth = windowWidth
         self.brickHeight = self.dummyBrick.rect.height
         self.brickWidth = self.dummyBrick.rect.width
+        self.levels = self.generateLevels()
 
     def getMapLevel(self, level):
         switcher = {
@@ -98,3 +101,13 @@ class LevelManager:
     def distanceFromLine(lineStart, lineEnd, pointX, pointY):
         return np.abs(np.cross(lineEnd - lineStart, lineStart - np.asarray([pointX, pointY]))) / norm(
             lineEnd - lineStart)
+
+    def getNextLevel(self):
+        self.levels.pop(0)
+        return self.levels[0]
+
+    def generateLevels(self):
+        levels = []
+        for i in range(0, 6):
+            levels.append(GameLevel(self.screen, self.getMapLevel(i)))
+        return levels

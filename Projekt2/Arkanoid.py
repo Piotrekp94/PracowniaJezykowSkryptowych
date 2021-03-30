@@ -25,6 +25,6 @@ pygame.mixer.music.play(-1)
 gameLoop = GameLoop(640, 480)
 
 while gameLoop.isGameOn():
-    gameLoop.next()
+    gameLoop.mainLoop()
 
 pygame.quit()
