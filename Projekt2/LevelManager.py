@@ -5,6 +5,7 @@ import pygame
 from numpy.linalg import norm
 
 from Projekt2.Brick import Brick
+from Projekt2.levels.EndGameLevel import EndGameLevel
 from Projekt2.levels.GameLevel import GameLevel
 
 
@@ -110,4 +111,5 @@ class LevelManager:
         levels = []
         for i in range(0, 6):
             levels.append(GameLevel(self.screen, self.getMapLevel(i)))
+        levels.append(EndGameLevel(self.screen))
         return levels

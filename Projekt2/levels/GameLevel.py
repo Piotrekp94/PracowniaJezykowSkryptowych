@@ -1,9 +1,9 @@
 import pygame
+from pygame.locals import K_p, K_n
 
 from Projekt2.Ball import Ball
 from Projekt2.Player import Player
 from Projekt2.levels.Level import Level
-from pygame.locals import K_UP, K_DOWN, K_RETURN, K_p, K_n
 
 
 class GameLevel(Level):
@@ -33,18 +33,9 @@ class GameLevel(Level):
 
     def draw(self):
         self.screen.fill((0, 0, 0))
-        for brick in self.bricks:
-            self.screen.blit(brick.surf, brick.rect)
         if self.player is not None:
             self.screen.blit(self.player.surf, self.player.rect)
+        for brick in self.bricks:
+            self.screen.blit(brick.surf, brick.rect)
         if self.ball is not None:
             self.screen.blit(self.ball.surf, self.ball.rect)
-
-        # if self.currentLevel > 5:
-        #     font = pygame.font.Font(pygame.font.get_default_font(), 30)
-        #     text_surface = font.render('Thank you for playing', True, (155, 2, 155))
-        #     text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 3))
-        #     self.screen.blit(text_surface, text_rect)
-        #     text_surface = font.render('Your Score is: ', True, (155, 2, 155))
-        #     text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 3 * 2))
-        #     self.screen.blit(text_surface, text_rect)

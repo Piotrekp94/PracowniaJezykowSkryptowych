@@ -33,7 +33,6 @@ class GameLoop:
         self.clock.tick(60)
         pygame.display.flip()
 
-
     def handleGameInput(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,16 +47,6 @@ class GameLoop:
         #
         #     collidingObject.kill()
         pass
-
-    def loadNextLevel(self):
-        if self.currentLevel < 5:
-            self.bricks = self.levelManager.getMapLevel(self.currentLevel + 1)
-            self.ball = Ball(315, 440)
-        if self.currentLevel == 5:
-            self.loadLastLevel()
-        if self.currentLevel > 5:
-            self.isPlaying = False
-        self.currentLevel += 1
 
     def loadLastLevel(self):
         self.bricks = []
