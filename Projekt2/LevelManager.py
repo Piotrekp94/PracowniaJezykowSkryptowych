@@ -104,6 +104,8 @@ class LevelManager:
             lineEnd - lineStart)
 
     def getNextLevel(self):
+        if len(self.levels) <= 0:
+            pygame.quit()
         self.levels.pop(0)
         return self.levels[0]
 

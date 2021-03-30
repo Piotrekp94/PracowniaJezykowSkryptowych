@@ -1,11 +1,8 @@
 import pygame
 from pygame.locals import KEYDOWN
 
-from Projekt2.Ball import Ball
 from Projekt2.LevelManager import LevelManager
 from Projekt2.levels.MainMenuLevel import MainMenu
-from Projekt2.Player import Player
-
 
 class GameLoop:
 
@@ -17,7 +14,6 @@ class GameLoop:
         self.screen = pygame.display.set_mode([width, height])
         self.levelManager = LevelManager(width, height, self.screen)
         self.clock = pygame.time.Clock()
-        # self.bricks = self.levelManager.getMapLevel(self.currentLevel)
         self.currentLevel = MainMenu(self.screen)
 
     def isGameOn(self):
@@ -48,13 +44,4 @@ class GameLoop:
         #     collidingObject.kill()
         pass
 
-    def loadLastLevel(self):
-        self.bricks = []
-        self.ball = None
 
-    def drawPausedText(self):
-        font = pygame.font.Font(pygame.font.get_default_font(), 36)
-        # now print the text
-        text_surface = font.render('Paused', True, (155, 2, 155))
-        text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 2))
-        self.screen.blit(text_surface, text_rect)

@@ -23,7 +23,7 @@ class GameLevel(Level):
                 self.ball.move()
         else:
             self.draw()
-            # self.drawPausedText()
+            self.drawPausedText()
 
     def handleInput(self, key):
         if key == K_p:
@@ -39,3 +39,10 @@ class GameLevel(Level):
             self.screen.blit(brick.surf, brick.rect)
         if self.ball is not None:
             self.screen.blit(self.ball.surf, self.ball.rect)
+
+    def drawPausedText(self):
+        font = pygame.font.Font(pygame.font.get_default_font(), 36)
+        # now print the text
+        text_surface = font.render('Paused', True, (155, 2, 155))
+        text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 2))
+        self.screen.blit(text_surface, text_rect)
