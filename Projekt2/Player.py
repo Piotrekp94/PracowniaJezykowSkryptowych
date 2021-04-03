@@ -43,5 +43,4 @@ class Player(pygame.sprite.Sprite):
 
     def saveScore(self):
         file_object = open('leaderboard.txt', 'a')
-        # Append 'hello' at the end of file
         file_object.write(str(self.points) + "\n")

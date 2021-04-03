@@ -22,7 +22,6 @@ class ScoreLevel(Level):
         file1 = open('leaderboard.txt', 'r')
         Lines = file1.readlines()
         scores = []
-        # Strips the newline character
         for line in Lines:
             scores.append(int(line.strip()))
         scores.sort(reverse=True)
