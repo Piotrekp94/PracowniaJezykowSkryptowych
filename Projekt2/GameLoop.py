@@ -18,7 +18,7 @@ class GameLoop:
 
         self.levelManager = LevelManager(width, height, self.screen, self.player)
         self.clock = pygame.time.Clock()
-        self.currentLevel = MainMenu(self.screen)
+        self.currentLevel = MainMenu(self.screen, self)
 
     def isGameOn(self):
         return self.isPlaying

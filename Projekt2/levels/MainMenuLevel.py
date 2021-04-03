@@ -1,12 +1,15 @@
 import pygame
+from pygame.locals import K_UP, K_DOWN, K_RETURN
 
 from Projekt2.levels.Level import Level
-from pygame.locals import K_UP, K_DOWN, K_RETURN
+from Projekt2.levels.ScoreLevel import ScoreLevel
 
 
 class MainMenu(Level):
-    def __init__(self, screen):
+    def __init__(self, screen, loop):
         super(MainMenu, self).__init__(screen, [])
+        self.gameLoop = loop
+        self.scoreLevel = ScoreLevel(screen, loop, self)
         self.selectedButton = 0
 
     def nextLoop(self):
@@ -57,7 +60,6 @@ class MainMenu(Level):
         if self.selectedButton == 0:
             self.deactivateLevel()
         if self.selectedButton == 1:
-            #TODO
-            return True
+            self.gameLoop.currentLevel = self.scoreLevel
         if self.selectedButton == 2:
             pygame.quit()
