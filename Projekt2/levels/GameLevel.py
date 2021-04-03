@@ -39,10 +39,16 @@ class GameLevel(Level):
             self.screen.blit(brick.surf, brick.rect)
         if self.ball is not None:
             self.screen.blit(self.ball.surf, self.ball.rect)
+        self.drawLifeAmount(0.05)
 
     def drawPausedText(self):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
-        # now print the text
         text_surface = font.render('Paused', True, (155, 2, 155))
         text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 2))
+        self.screen.blit(text_surface, text_rect)
+
+    def drawLifeAmount(self, offsetPercent):
+        font = pygame.font.Font(pygame.font.get_default_font(), 36)
+        text_surface = font.render('Your Lifes: ' + str(self.player.getLifes()), True, (155, 2, 155))
+        text_rect = text_surface.get_rect(center=(self.width * offsetPercent, self.height * offsetPercent))
         self.screen.blit(text_surface, text_rect)

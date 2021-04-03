@@ -4,6 +4,7 @@ from pygame.locals import KEYDOWN
 from Projekt2.LevelManager import LevelManager
 from Projekt2.levels.MainMenuLevel import MainMenu
 
+
 class GameLoop:
 
     def __init__(self, width, height):
@@ -43,5 +44,3 @@ class GameLoop:
         #
         #     collidingObject.kill()
         pass
-
-
