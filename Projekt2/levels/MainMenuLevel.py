@@ -6,7 +6,7 @@ from pygame.locals import K_UP, K_DOWN, K_RETURN
 
 class MainMenu(Level):
     def __init__(self, screen):
-        super(MainMenu, self).__init__(screen)
+        super(MainMenu, self).__init__(screen, [])
         self.selectedButton = 0
 
     def nextLoop(self):

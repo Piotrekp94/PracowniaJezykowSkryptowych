@@ -9,5 +9,5 @@ class Brick(pygame.sprite.Sprite):
         self.surf = pygame.image.load("images/klocek.png").convert()
         self.rect = self.surf.get_rect(center=(x, y))
 
-    def set_kolor(self, color):
+    def set_color(self, color):
         self.surf.fill(color)

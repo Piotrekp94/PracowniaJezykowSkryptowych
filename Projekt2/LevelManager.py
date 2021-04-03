@@ -11,13 +11,15 @@ from Projekt2.levels.GameLevel import GameLevel
 
 class LevelManager:
 
-    def __init__(self, windowWidth, windowHeight, screen):
+    def __init__(self, windowWidth, windowHeight, screen, player):
         self.screen = screen
         self.dummyBrick = Brick(0, 0)
         self.windowHeight = windowHeight
         self.windowWidth = windowWidth
         self.brickHeight = self.dummyBrick.rect.height
         self.brickWidth = self.dummyBrick.rect.width
+        self.player = player
+
         self.levels = self.generateLevels()
 
     def getMapLevel(self, level):
@@ -112,6 +114,7 @@ class LevelManager:
     def generateLevels(self):
         levels = []
         for i in range(0, 6):
-            levels.append(GameLevel(self.screen, self.getMapLevel(i)))
-        levels.append(EndGameLevel(self.screen))
+            print(self.player)
+            levels.append(GameLevel(self.screen, self.getMapLevel(i), self.player))
+        levels.append(EndGameLevel(self.screen, self.player))
         return levels

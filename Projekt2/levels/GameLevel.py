@@ -7,9 +7,8 @@ from Projekt2.levels.Level import Level
 
 
 class GameLevel(Level):
-    def __init__(self, screen, bricks):
-        super(GameLevel, self).__init__(screen)
-        self.player = Player(305, 450, self.width)
+    def __init__(self, screen, bricks, player):
+        super(GameLevel, self).__init__(screen, player)
         self.ball = Ball(315, 440)
         self.bricks = bricks
 
@@ -40,7 +39,6 @@ class GameLevel(Level):
         #     collidingObject.kill()
         pass
 
-
     def handleCollisionWithWall(self, self1):
         print(str(self.ball.rect.y))
         if self.ball.rect.y < 0:
@@ -62,7 +60,6 @@ class GameLevel(Level):
             self.screen.blit(self.ball.surf, self.ball.rect)
         self.drawLifeAmount(0.05)
 
-
     def drawPausedText(self):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
         text_surface = font.render('Paused', True, (155, 2, 155))
@@ -71,6 +68,6 @@ class GameLevel(Level):
 
     def drawLifeAmount(self, offsetPercent):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
-        text_surface = font.render('Your Lifes: ' + str(self.player.getLives()), True, (155, 2, 155))
+        text_surface = font.render('Your Lives: ' + str(self.player.getLives()), True, (155, 2, 155))
         text_rect = text_surface.get_rect(center=(self.width * offsetPercent, self.height * offsetPercent))
         self.screen.blit(text_surface, text_rect)

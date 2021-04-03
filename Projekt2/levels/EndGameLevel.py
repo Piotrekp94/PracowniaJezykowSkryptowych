@@ -1,8 +1,6 @@
 import pygame
 
 from Projekt2.levels.GameLevel import GameLevel
-from Projekt2.levels.Level import Level
-from pygame.locals import K_UP, K_DOWN, K_RETURN
 
 
 class EndGameLevel(GameLevel):
@@ -14,15 +12,18 @@ class EndGameLevel(GameLevel):
     def handleInput(self, key):
         pass
 
-    def __init__(self, screen):
-        super(EndGameLevel, self).__init__(screen, [])
+    def __init__(self, screen, player):
+        super(EndGameLevel, self).__init__(screen, [], player)
 
     def draw(self):
         self.screen.fill((0, 0, 0))
         if self.player is not None:
             self.screen.blit(self.player.surf, self.player.rect)
         font = pygame.font.Font(pygame.font.get_default_font(), 30)
-        text_surface = font.render('Thank you for playing', True, (155, 2, 155))
+        endGameText = 'Thank you for playing'
+        if self.player.isDead():
+            endGameText = 'You Died'
+        text_surface = font.render(endGameText, True, (155, 2, 155))
         text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 3))
         self.screen.blit(text_surface, text_rect)
         text_surface = font.render('Your Score is: ', True, (155, 2, 155))
