@@ -8,7 +8,7 @@ class Ball(pygame.sprite.Sprite):
         self.surf.fill((255, 255, 255))
         self.startingPos = (x, y)
         self.rect = self.surf.get_rect(center=self.startingPos)
-        self.velocity = pygame.Vector2(-10, -20)
+        self.velocity = pygame.Vector2(-1, -2)
 
     def move(self):
         self.rect.move_ip(self.velocity)
@@ -27,4 +27,4 @@ class Ball(pygame.sprite.Sprite):
 
     def reset(self):
         self.rect = self.surf.get_rect(center=self.startingPos)
-        self.velocity = pygame.Vector2(-10, -20)
+        self.velocity = pygame.Vector2(-1, -2)
