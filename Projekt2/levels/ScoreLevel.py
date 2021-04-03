@@ -32,7 +32,6 @@ class ScoreLevel(Level):
 
     def draw(self):
         self.screen.fill((0, 0, 0))
-        print(self.scores)
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
         text_surface = font.render('BACK', True, self.selectedColor)
         text_rect = text_surface.get_rect(center=(self.width / 2, self.height / 4 * 3))

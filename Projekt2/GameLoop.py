@@ -41,3 +41,5 @@ class GameLoop:
                 self.isPlaying = False
             elif event.type == KEYDOWN:
                 self.currentLevel.handleInput(event.key)
+
+

@@ -22,6 +22,8 @@ class GameLevel(Level):
         else:
             self.draw()
             self.drawPausedText()
+        if len(self.bricks) == 0:
+            self.deactivateLevel()
 
     def handleInput(self, key):
         if key == K_p:
@@ -33,19 +35,11 @@ class GameLevel(Level):
         self.handleCollisionWithWall()
         self.handleCollisionWithPlayer()
         self.handleCollisionWithBrick()
-        # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
-        # if (collidingObject):
-        #
-        #
-        #     collidingObject.kill()
-        pass
 
     def handleCollisionWithBrick(self):
         collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
 
         if collidingObject is not None:
-            print(collidingObject.rect.size[0])
-
             getDistanceX = abs(collidingObject.rect.x - self.ball.rect.x)
             if getDistanceX < collidingObject.rect.size[0] - 1:
                 self.ball.bounceY()

@@ -35,8 +35,13 @@ class Player(pygame.sprite.Sprite):
     def die(self):
         self.lives = self.lives - 1
         self.rect = self.surf.get_rect(center=self.startingPosition)
-
+        if self.lives == 0:
+            self.saveScore()
 
     def addPoints(self):
         self.points += 10
 
+    def saveScore(self):
+        file_object = open('leaderboard.txt', 'a')
+        # Append 'hello' at the end of file
+        file_object.write(str(self.points) + "\n")

@@ -36,7 +36,6 @@ class LevelManager:
         bricks = pygame.sprite.Group()
         xoffset = 10
         amount = self.windowWidth / (self.brickWidth + xoffset)
-        print(int(amount))
         for i in range(int(amount)):
             bricks.add(Brick(i * self.brickWidth + (i + 1) * xoffset + xoffset, 50))
         return bricks
@@ -114,7 +113,6 @@ class LevelManager:
     def generateLevels(self):
         levels = []
         for i in range(0, 6):
-            print(self.player)
             levels.append(GameLevel(self.screen, self.getMapLevel(i), self.player))
         levels.append(EndGameLevel(self.screen, self.player))
         return levels
