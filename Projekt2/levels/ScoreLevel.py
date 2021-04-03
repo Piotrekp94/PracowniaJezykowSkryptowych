@@ -17,7 +17,8 @@ class ScoreLevel(Level):
     def nextLoop(self):
         self.draw()
 
-    def prepareScores(self):
+    @staticmethod
+    def prepareScores():
         file1 = open('leaderboard.txt', 'r')
         Lines = file1.readlines()
         scores = []
