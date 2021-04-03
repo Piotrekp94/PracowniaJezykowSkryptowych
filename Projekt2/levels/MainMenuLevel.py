@@ -16,7 +16,6 @@ class MainMenu(Level):
         defaultColor = (155, 2, 155)
         selectedColor = (255, 255, 0)
         self.screen.fill((0, 0, 0))
-        # print(self.selectedButton)
         font = pygame.font.Font(pygame.font.get_default_font(), 30)
         if self.selectedButton == 0:
             text_surface = font.render('Start', True, selectedColor)

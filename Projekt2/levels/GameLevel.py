@@ -2,7 +2,6 @@ import pygame
 from pygame.locals import K_p, K_n
 
 from Projekt2.Ball import Ball
-from Projekt2.Player import Player
 from Projekt2.levels.Level import Level
 
 
@@ -31,7 +30,8 @@ class GameLevel(Level):
             self.deactivateLevel()
 
     def handleCollision(self):
-        self.handleCollisionWithWall(self)
+        self.handleCollisionWithWall()
+        self.handleCollisionWithPlayer()
         # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
         # if (collidingObject):
         #
@@ -39,14 +39,17 @@ class GameLevel(Level):
         #     collidingObject.kill()
         pass
 
-    def handleCollisionWithWall(self, self1):
+    def handleCollisionWithPlayer(self):
+        if self.ball.rect.colliderect(self.player.rect):
+            self.ball.goUp()
+
+    def handleCollisionWithWall(self):
         print(str(self.ball.rect.y))
         if self.ball.rect.y < 0:
             self.ball.goDown()
         if self.ball.rect.y > self.height:
             self.player.die()
             self.ball.reset()
-
         if self.ball.rect.x < 0 or self.ball.rect.x > self.width:
             self.ball.bounceX()
 
