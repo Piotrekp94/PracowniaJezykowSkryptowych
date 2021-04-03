@@ -37,10 +37,4 @@ class GameLoop:
             elif event.type == KEYDOWN:
                 self.currentLevel.handleInput(event.key)
 
-    def handleCollision(self):
-        # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
-        # if (collidingObject):
-        #     if(collidingObject.rect.width / 2):
-        #
-        #     collidingObject.kill()
-        pass
+

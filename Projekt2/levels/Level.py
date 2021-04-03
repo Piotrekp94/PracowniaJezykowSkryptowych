@@ -17,7 +17,7 @@ class Level:
     def nextLoop(self):
         return
 
-    def disactiveLevel(self):
+    def deactivateLevel(self):
         self.isActive = False
 
     def togglePause(self):

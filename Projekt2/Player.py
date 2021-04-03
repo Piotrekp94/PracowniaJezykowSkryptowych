@@ -1,17 +1,18 @@
 import pygame
-from pygame.locals import KEYDOWN, K_ESCAPE, K_UP, K_DOWN, K_LEFT, K_RIGHT, QUIT
+from pygame.locals import K_LEFT, K_RIGHT
 
 
 class Player(pygame.sprite.Sprite):
 
     def __init__(self, x, y, width):
         pygame.sprite.Sprite.__init__(self)
+        self.startingPosition = (x, y)
         self.surf = pygame.Surface((30, 10))
         self.surf.fill((255, 0, 0))
         self.surf = pygame.image.load("images/belka.png").convert()
-        self.rect = self.surf.get_rect(center=(x, y))
+        self.rect = self.surf.get_rect(center=self.startingPosition)
         self.screenWidth = width
-        self.lifes = 3
+        self.lives = 3
 
     def update(self, pressed_keys):
         if pressed_keys[K_LEFT]:
@@ -24,5 +25,13 @@ class Player(pygame.sprite.Sprite):
         if self.rect.right > self.screenWidth - 30:
             self.rect.right = self.screenWidth - 30
 
-    def getLifes(self):
-        return self.lifes
+    def getLives(self):
+        return self.lives
+
+    def isDead(self):
+        return self.lives <= 0
+
+    def die(self):
+        self.lives = self.lives - 1
+        self.rect = self.surf.get_rect(center=self.startingPosition)
+

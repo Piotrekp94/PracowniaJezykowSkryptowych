@@ -19,7 +19,7 @@ class GameLevel(Level):
             self.player.update(pressed_keys)
             self.draw()
             if self.ball is not None:
-                # self.handleCollision()
+                self.handleCollision()
                 self.ball.move()
         else:
             self.draw()
@@ -29,7 +29,28 @@ class GameLevel(Level):
         if key == K_p:
             self.togglePause()
         if key == K_n:
-            self.disactiveLevel()
+            self.deactivateLevel()
+
+    def handleCollision(self):
+        self.handleCollisionWithWall(self)
+        # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
+        # if (collidingObject):
+        #
+        #
+        #     collidingObject.kill()
+        pass
+
+
+    def handleCollisionWithWall(self, self1):
+        print(str(self.ball.rect.y))
+        if self.ball.rect.y < 0:
+            self.ball.goDown()
+        if self.ball.rect.y > self.height:
+            self.player.die()
+            self.ball.reset()
+
+        if self.ball.rect.x < 0 or self.ball.rect.x > self.width:
+            self.ball.bounceX()
 
     def draw(self):
         self.screen.fill((0, 0, 0))
@@ -41,6 +62,7 @@ class GameLevel(Level):
             self.screen.blit(self.ball.surf, self.ball.rect)
         self.drawLifeAmount(0.05)
 
+
     def drawPausedText(self):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
         text_surface = font.render('Paused', True, (155, 2, 155))
@@ -49,6 +71,6 @@ class GameLevel(Level):
 
     def drawLifeAmount(self, offsetPercent):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
-        text_surface = font.render('Your Lifes: ' + str(self.player.getLifes()), True, (155, 2, 155))
+        text_surface = font.render('Your Lifes: ' + str(self.player.getLives()), True, (155, 2, 155))
         text_rect = text_surface.get_rect(center=(self.width * offsetPercent, self.height * offsetPercent))
         self.screen.blit(text_surface, text_rect)

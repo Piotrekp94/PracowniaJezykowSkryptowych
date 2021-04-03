@@ -56,7 +56,7 @@ class MainMenu(Level):
 
     def enter(self):
         if self.selectedButton == 0:
-            self.disactiveLevel()
+            self.deactivateLevel()
         if self.selectedButton == 1:
             #TODO
             return True
