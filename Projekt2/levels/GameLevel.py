@@ -32,6 +32,7 @@ class GameLevel(Level):
     def handleCollision(self):
         self.handleCollisionWithWall()
         self.handleCollisionWithPlayer()
+        self.handleCollisionWithBrick()
         # collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
         # if (collidingObject):
         #
@@ -39,12 +40,25 @@ class GameLevel(Level):
         #     collidingObject.kill()
         pass
 
+    def handleCollisionWithBrick(self):
+        collidingObject = pygame.sprite.spritecollideany(self.ball, self.bricks)
+
+        if collidingObject is not None:
+            print(collidingObject.rect.size[0])
+
+            getDistanceX = abs(collidingObject.rect.x - self.ball.rect.x)
+            if getDistanceX < collidingObject.rect.size[0] - 1:
+                self.ball.bounceY()
+            else:
+                self.ball.bounceX()
+            collidingObject.kill()
+            self.player.addPoints()
+
     def handleCollisionWithPlayer(self):
         if self.ball.rect.colliderect(self.player.rect):
             self.ball.goUp()
 
     def handleCollisionWithWall(self):
-        print(str(self.ball.rect.y))
         if self.ball.rect.y < 0:
             self.ball.goDown()
         if self.ball.rect.y > self.height:
@@ -62,6 +76,7 @@ class GameLevel(Level):
         if self.ball is not None:
             self.screen.blit(self.ball.surf, self.ball.rect)
         self.drawLifeAmount(0.05)
+        self.drawPoints(0.05, 0.25)
 
     def drawPausedText(self):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
@@ -73,4 +88,11 @@ class GameLevel(Level):
         font = pygame.font.Font(pygame.font.get_default_font(), 36)
         text_surface = font.render('Your Lives: ' + str(self.player.getLives()), True, (155, 2, 155))
         text_rect = text_surface.get_rect(center=(self.width * offsetPercent, self.height * offsetPercent))
+        self.screen.blit(text_surface, text_rect)
+
+    def drawPoints(self, offsetPercentY, offsetPercentX):
+        font = pygame.font.Font(pygame.font.get_default_font(), 36)
+        text_surface = font.render('Your Points: ' + str(self.player.points), True, (155, 2, 155))
+        text_rect = text_surface.get_rect(
+            center=(self.width - self.width * offsetPercentX, self.height * offsetPercentY))
         self.screen.blit(text_surface, text_rect)

@@ -6,6 +6,7 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self, x, y, width):
         pygame.sprite.Sprite.__init__(self)
+        self.points = 0
         self.startingPosition = (x, y)
         self.surf = pygame.Surface((30, 10))
         self.surf.fill((255, 0, 0))
@@ -22,8 +23,8 @@ class Player(pygame.sprite.Sprite):
 
         if self.rect.left < 0:
             self.rect.left = 0
-        if self.rect.right > self.screenWidth - 30:
-            self.rect.right = self.screenWidth - 30
+        if self.rect.right > self.screenWidth:
+            self.rect.right = self.screenWidth
 
     def getLives(self):
         return self.lives
@@ -34,4 +35,8 @@ class Player(pygame.sprite.Sprite):
     def die(self):
         self.lives = self.lives - 1
         self.rect = self.surf.get_rect(center=self.startingPosition)
+
+
+    def addPoints(self):
+        self.points += 10
 
