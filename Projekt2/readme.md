@@ -41,5 +41,25 @@
 * Pausing during game levels
 * Generated levels based on math equations
 
-### Levels
+## Levels
 
+### MainMenu
+![MainMenu](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/MainMenu.png)
+### 1 Level
+![1 Level](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/1Level.png)
+### 2 Level
+![2 Level](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/2Level.png)
+### 3 Level
+![3 Level](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/3Level.png)
+### 4 Level
+![4 Level](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/4Level.png)
+### 5 Level
+![5 Level](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/5Level.png)
+### BeatGameScreen
+![BeatGameScreen](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/BeatGameScreen.png)
+### LostGameScreen
+![LostGameScreen](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/LostGameScreen.png)
+### ScoresMenu
+![ScoresMenu](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/ScoresMenu.png)
+### PauseScreen
+![PauseScreen](https://github.com/Piotrekp94/PracowniaJezykowSkryptowych/blob/master/Projekt2/images/documentation/PauseScreen.png)
