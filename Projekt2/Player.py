@@ -35,8 +35,6 @@ class Player(pygame.sprite.Sprite):
     def die(self):
         self.lives = self.lives - 1
         self.rect = self.surf.get_rect(center=self.startingPosition)
-        if self.lives == 0:
-            self.saveScore()
 
     def addPoints(self):
         self.points += 10
