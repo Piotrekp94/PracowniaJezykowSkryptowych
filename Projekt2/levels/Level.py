@@ -18,6 +18,10 @@ class Level:
     def nextLoop(self):
         return
 
+    @abstractmethod
+    def draw(self):
+        return
+
     def deactivateLevel(self):
         self.isActive = False
 

@@ -1,5 +1,5 @@
 import pygame
-from pygame.locals import K_p, K_n
+from pygame.locals import K_p, K_n, K_ESCAPE
 
 from Projekt2.Ball import Ball
 from Projekt2.levels.Level import Level
@@ -29,6 +29,8 @@ class GameLevel(Level):
         if key == K_p:
             self.togglePause()
         if key == K_n:
+            self.deactivateLevel()
+        if key == K_ESCAPE:
             self.deactivateLevel()
 
     def handleCollision(self):

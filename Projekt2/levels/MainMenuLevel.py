@@ -13,9 +13,9 @@ class MainMenu(Level):
         self.selectedButton = 0
 
     def nextLoop(self):
-        self.drawMenu()
+        self.draw()
 
-    def drawMenu(self):
+    def draw(self):
         defaultColor = (155, 2, 155)
         selectedColor = (255, 255, 0)
         self.screen.fill((0, 0, 0))
@@ -63,3 +63,4 @@ class MainMenu(Level):
             self.gameLoop.currentLevel = self.scoreLevel
         if self.selectedButton == 2:
             pygame.quit()
+            exit()
