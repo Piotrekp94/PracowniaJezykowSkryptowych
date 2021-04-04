@@ -6,5 +6,6 @@
 !*.sh
 !*.py
 !*.png
+!*.md
 !*.mp3
 venv/
